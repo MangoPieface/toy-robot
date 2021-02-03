@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.UI", "toy-robot\ToyRobot.UI.csproj", "{70B7ADEB-D4FF-485E-8A64-D629F1C7BC67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.Tests", "toy-robot-tests\ToyRobot.Tests.csproj", "{2BDD671E-B003-4EF0-9A8C-EE80E793078F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyRobot.Domain", "ToyRobot.Logic\ToyRobot.Domain.csproj", "{8506C490-AC10-4CBC-A10B-A5506285F91F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70B7ADEB-D4FF-485E-8A64-D629F1C7BC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B7ADEB-D4FF-485E-8A64-D629F1C7BC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B7ADEB-D4FF-485E-8A64-D629F1C7BC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B7ADEB-D4FF-485E-8A64-D629F1C7BC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BDD671E-B003-4EF0-9A8C-EE80E793078F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDD671E-B003-4EF0-9A8C-EE80E793078F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDD671E-B003-4EF0-9A8C-EE80E793078F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDD671E-B003-4EF0-9A8C-EE80E793078F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8506C490-AC10-4CBC-A10B-A5506285F91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8506C490-AC10-4CBC-A10B-A5506285F91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8506C490-AC10-4CBC-A10B-A5506285F91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8506C490-AC10-4CBC-A10B-A5506285F91F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3928E005-37DF-4481-B8BA-5B0D31074BDC}
+	EndGlobalSection
+EndGlobal
