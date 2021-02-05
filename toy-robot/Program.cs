@@ -1,8 +1,7 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using ToyRobot.Domain;
-using ToyRobot.Domain.Commands;
-using ToyRobot.Domain.Enums;
+using ToyRobot.Logic;
+using ToyRobot.Logic.Commands;
+using ToyRobot.Logic.Enums;
 
 namespace ToyRobot.UI
 {
@@ -17,7 +16,14 @@ namespace ToyRobot.UI
 
             while (true)
             {
-                Console.WriteLine("Command?");
+                if (!robot.IsPlaced())
+                {
+                    Console.WriteLine("Robot is not placed on the table - use PLACE command");
+                }
+
+               
+
+                Console.Write("Command: ");
                 var movementCommand = Console.ReadLine()?.ToUpper();
 
                 switch (movementCommand)
@@ -29,21 +35,30 @@ namespace ToyRobot.UI
                             Y = 0
                         };
                         commander.Commands.Enqueue(place);
+                        Console.WriteLine("PLACED");
                         break;
                     case "MOVE":
                         MoveCommand move = new MoveCommand(robot, table);
                         commander.Commands.Enqueue(move);
+                        if (robot.IsPlaced()) Console.WriteLine("MOVED");
                         break;
                     case "RIGHT":
                         RightCommand right = new RightCommand(robot);
                         commander.Commands.Enqueue(right);
+                        if (robot.IsPlaced()) Console.WriteLine("TURNED RIGHT");
                         break;
                     case "LEFT":
                         LeftCommand left = new LeftCommand(robot);
                         commander.Commands.Enqueue(left);
+                        if (robot.IsPlaced()) Console.WriteLine("TURNED LEFT");
+                        break;
+                    case "UNDO":
+                        commander.UndoCommands(1);
+                        if (robot.IsPlaced()) Console.WriteLine("UNDID LAST COMMAND");
                         break;
                     case "REPORT":
-                        Console.WriteLine($"Robot is facing {Enum.GetName(typeof(Facing), robot.Direction)} X position {robot.Position.X} Y position {robot.Position.Y} ");
+                        if (robot.IsPlaced())
+                            Console.WriteLine($"Robot is facing {Enum.GetName(typeof(Facing), robot.Direction)} X position {robot.Position.X} Y position {robot.Position.Y}");
                         break;
 
                 }

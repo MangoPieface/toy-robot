@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToyRobot.Domain.Commands
+﻿namespace ToyRobot.Logic.Commands
 {
     public abstract class RobotCommand
     {
@@ -15,5 +11,6 @@ namespace ToyRobot.Domain.Commands
         }
 
         public abstract void Execute();
+        public abstract void Undo();
     }
 }

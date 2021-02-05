@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToyRobot.Domain.Commands
+﻿namespace ToyRobot.Logic.Commands
 {
     public class LeftCommand : RobotCommand
     {
@@ -13,7 +9,16 @@ namespace ToyRobot.Domain.Commands
 
         public override void Execute()
         {
+            if (!_robot.IsPlaced()) return;
+
             _robot.Turn(Robot.Left);
+        }
+
+        public override void Undo()
+        {
+            if (!_robot.IsPlaced()) return;
+
+            _robot.Turn(Robot.Right);
         }
     }
 }

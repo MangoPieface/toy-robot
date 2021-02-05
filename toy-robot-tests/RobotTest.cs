@@ -1,8 +1,9 @@
 using System;
-using ToyRobot.Domain;
-using ToyRobot.Domain.Enums;
-using ToyRobot.Domain.Exceptions;
-using ToyRobot.Domain.Interfaces;
+using ToyRobot.Logic;
+using ToyRobot.Logic.Commands;
+using ToyRobot.Logic.Enums;
+using ToyRobot.Logic.Exceptions;
+using ToyRobot.Logic.Interfaces;
 using Xunit;
 
 namespace ToyRobot.Tests
@@ -68,25 +69,61 @@ namespace ToyRobot.Tests
             Assert.Throws<TurnParameterException>(() => robot.Turn("abc"));
         }
 
+        [Fact]
+        public void Robot_TestMultipleMovement_RobotReportsCorrectLocation()
+        {
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
 
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
+
+
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(right);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(left);
+            commander.Commands.Enqueue(left);
+
+            commander.ExecuteCommands();
+
+            Assert.Equal(Facing.West,robot.Direction);
+            Assert.Equal(2, robot.Position.Y);
+            Assert.Equal(1, robot.Position.X);
+        }
 
         [Fact]
-        public void TestPlaceandMove()
+        public void Robot_TestMultipleMovementWithUndos_RobotReportsOrignalPosition()
         {
-            IRobot robot = new Robot
-            {
-                Direction = Facing.North
-            };
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
 
-            robot.Place(0, 0);
-            robot.Move();
-            var a = robot.Report();
-            robot.Turn("right");
-            robot.Move();
-            robot.Move();
-            a = robot.Report();
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
 
 
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(right);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(left);
+            commander.Commands.Enqueue(left);
+
+            commander.ExecuteCommands();
+            commander.UndoCommands(6);
+
+            Assert.Equal(Facing.North, robot.Direction);
+            Assert.Equal(0, robot.Position.Y);
+            Assert.Equal(0, robot.Position.X);
         }
     }
 }

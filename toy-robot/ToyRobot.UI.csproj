@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToyRobot.Logic\ToyRobot.Domain.csproj" />
+    <ProjectReference Include="..\ToyRobot.Logic\ToyRobot.Logic.csproj" />
   </ItemGroup>
 
 </Project>

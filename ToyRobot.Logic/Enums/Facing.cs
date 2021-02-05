@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToyRobot.Domain.Enums
+﻿namespace ToyRobot.Logic.Enums
 {
     public enum Facing
     {

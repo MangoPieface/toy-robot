@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ToyRobot.Domain
+namespace ToyRobot.Logic
 {
     public class Tabletop
     {

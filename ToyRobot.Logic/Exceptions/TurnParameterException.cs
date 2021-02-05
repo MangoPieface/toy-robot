@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ToyRobot.Domain.Exceptions
+namespace ToyRobot.Logic.Exceptions
 {
     public class TurnParameterException : ArgumentException
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToyRobot.Domain.Commands
+﻿namespace ToyRobot.Logic.Commands
 {
     public class PlaceCommand : RobotCommand
     {
@@ -16,6 +12,11 @@ namespace ToyRobot.Domain.Commands
         public override void Execute()
         {
             _robot.Place(X, Y);
+        }
+
+        public override void Undo()
+        {
+            _robot.UnPlace();
         }
     }
 }

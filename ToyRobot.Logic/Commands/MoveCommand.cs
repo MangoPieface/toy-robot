@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ToyRobot.Domain.Enums;
+﻿using ToyRobot.Logic.Enums;
 
-namespace ToyRobot.Domain.Commands
+namespace ToyRobot.Logic.Commands
 {
     public class MoveCommand : RobotCommand
     {
         private readonly Tabletop _tabletop;
+
 
         public MoveCommand(Robot robot, Tabletop tabletop) : base(robot)
         {
@@ -16,19 +14,31 @@ namespace ToyRobot.Domain.Commands
 
         public override void Execute()
         {
-            if (_robot.Position.Y < _tabletop.TableDimention.Y && _robot.Direction == Facing.North) 
-                 _robot.Move();
+            if (!_robot.IsPlaced())
+            {
+                return;
+            }
+
+            if (_robot.Position.Y < _tabletop.TableDimention.Y && _robot.Direction == Facing.North)
+                _robot.Move(Direction.Forward);
 
             if (_robot.Position.X < _tabletop.TableDimention.X && _robot.Direction == Facing.East)
-                _robot.Move();
+                _robot.Move(Direction.Forward);
 
             if (_robot.Position.Y > 0 && _robot.Direction == Facing.South)
-                _robot.Move();
+                _robot.Move(Direction.Forward);
 
             if (_robot.Position.X > 0 && _robot.Direction == Facing.West)
-                _robot.Move();
+                _robot.Move(Direction.Backward);
+        }
 
-
+        public override void Undo()
+        {
+            if (!_robot.IsPlaced())
+            {
+                return;
+            }
+            _robot.Move(Direction.Backward);
         }
     }
 }
