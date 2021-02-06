@@ -3,7 +3,7 @@ using ToyRobot.Logic;
 using ToyRobot.Logic.Commands;
 using ToyRobot.Logic.Enums;
 
-namespace ToyRobot.UI
+namespace ToyRobot.ConsoleUI
 {
     class Program
     {

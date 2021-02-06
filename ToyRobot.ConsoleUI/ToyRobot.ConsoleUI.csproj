@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>ToyRobot.UI</RootNamespace>
+    <RootNamespace>ToyRobot.ConsoleUI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
