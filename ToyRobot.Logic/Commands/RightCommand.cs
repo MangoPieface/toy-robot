@@ -9,9 +9,14 @@
 
         public override void Execute()
         {
-            if (!_robot.IsPlaced()) return;
+            if (!_robot.IsPlaced())
+            {
+                _robot.CommandSuccess = false;
+                return;
+            }
 
             _robot.Turn(Robot.Right);
+            _robot.CommandSuccess = true;
         }
 
         public override void Undo()

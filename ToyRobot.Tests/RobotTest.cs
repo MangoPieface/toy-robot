@@ -117,11 +117,122 @@ namespace ToyRobot.Tests
             commander.Commands.Enqueue(move);
             commander.Commands.Enqueue(left);
             commander.Commands.Enqueue(left);
+            commander.Commands.Enqueue(left);
+            commander.Commands.Enqueue(move);
+
+            commander.ExecuteCommands();
+            commander.UndoCommands(8);
+
+            Assert.Equal(Facing.North, robot.Direction);
+            Assert.Equal(0, robot.Position.Y);
+            Assert.Equal(0, robot.Position.X);
+        }
+        
+        [Fact]
+        public void Robot_TestUndoWhenWhenRobotIsStuckAgainstNorthWall_RobotReportsOrignalPosition()
+        {
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
+
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
+
+
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+
+            commander.ExecuteCommands();
+            commander.UndoCommands(7);
+
+            Assert.Equal(Facing.North, robot.Direction);
+            Assert.Equal(0, robot.Position.Y);
+            Assert.Equal(0, robot.Position.X);
+        }
+
+        [Fact]
+        public void Robot_TestUndoWhenWhenRobotIsStuckAgainstWestWall_RobotReportsOrignalPosition()
+        {
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
+
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
+
+
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(left);
+            commander.Commands.Enqueue(move);
+
+            commander.ExecuteCommands();
+            commander.UndoCommands(2);
+
+            Assert.Equal(Facing.North, robot.Direction);
+            Assert.Equal(0, robot.Position.Y);
+            Assert.Equal(0, robot.Position.X);
+        }
+
+        [Fact]
+        public void Robot_TestUndoWhenWhenRobotIsStuckAgainstEastWall_RobotReportsOrignalPosition()
+        {
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
+
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
+
+
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(right);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
+            commander.Commands.Enqueue(move);
 
             commander.ExecuteCommands();
             commander.UndoCommands(6);
 
-            Assert.Equal(Facing.North, robot.Direction);
+            Assert.Equal(0, robot.Position.Y);
+            Assert.Equal(0, robot.Position.X);
+        }
+
+        [Fact]
+        public void Robot_TestUndoWhenWhenRobotIsStuckAgainstSouthWall_RobotReportsOrignalPosition()
+        {
+            Robot robot = new Robot();
+            Tabletop table = new Tabletop(5, 5);
+            RobotCommander commander = new RobotCommander();
+
+            PlaceCommand place = new PlaceCommand(robot);
+            MoveCommand move = new MoveCommand(robot, table);
+            RightCommand right = new RightCommand(robot);
+            LeftCommand left = new LeftCommand(robot);
+
+
+            commander.Commands.Enqueue(place);
+            commander.Commands.Enqueue(right);
+            commander.Commands.Enqueue(right);
+            commander.Commands.Enqueue(move);
+
+            commander.ExecuteCommands();
+            commander.UndoCommands(1);
+
             Assert.Equal(0, robot.Position.Y);
             Assert.Equal(0, robot.Position.X);
         }

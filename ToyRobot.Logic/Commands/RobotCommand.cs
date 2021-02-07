@@ -12,5 +12,10 @@
 
         public abstract void Execute();
         public abstract void Undo();
+
+        public virtual bool HasExcecutedSuccesfully()
+        {
+            return _robot.CommandSuccess;
+        }
     }
 }

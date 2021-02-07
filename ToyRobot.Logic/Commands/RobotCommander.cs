@@ -19,7 +19,10 @@ namespace ToyRobot.Logic.Commands
             {
                 RobotCommand command = Commands.Dequeue();
                 command.Execute();
-                _undoStack.Push(command);
+                if (command.HasExcecutedSuccesfully())
+                {
+                    _undoStack.Push(command);
+                }
             }
         }
 

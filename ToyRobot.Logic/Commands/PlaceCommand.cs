@@ -12,6 +12,7 @@
         public override void Execute()
         {
             _robot.Place(X, Y);
+            _robot.CommandSuccess = true;
         }
 
         public override void Undo()

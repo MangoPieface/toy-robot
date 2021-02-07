@@ -15,6 +15,8 @@ namespace ToyRobot.Logic
         public Facing Direction { get; set; }
         private bool RobotPlaced { get; set; }
 
+        public bool CommandSuccess { get; set; }
+
         public Robot()
         {
             RobotPlaced = false;
@@ -97,5 +99,7 @@ namespace ToyRobot.Logic
         {
             return RobotPlaced;
         }
+
+       
     }
 }
