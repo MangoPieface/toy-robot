@@ -12,7 +12,7 @@ namespace ToyRobot.Logic.Interfaces
 
         void Turn(string direction);
 
-        void Place(int x, int y);
+        void Place(int x, int y, Facing facing);
 
         bool IsPlaced();
 

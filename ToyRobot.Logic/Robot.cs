@@ -83,16 +83,18 @@ namespace ToyRobot.Logic
             }
         }
 
-        public void Place(int x, int y)
+        public void Place(int x, int y, Facing direction)
         {
             Position = new Point(x, y);
-            Direction = Facing.North;
+            Direction = direction;
             RobotPlaced = true;
         }
 
         public void UnPlace()
         {
             RobotPlaced = false;
+            Position = Point.Empty;
+
         }
 
         public bool IsPlaced()
