@@ -18,6 +18,8 @@ namespace ToyRobot.Logic.Interfaces
 
         bool CommandSuccess { get; set; }
 
+        void UnPlace();
+
 
     }
 }

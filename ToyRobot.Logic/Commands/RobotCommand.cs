@@ -1,10 +1,12 @@
-﻿namespace ToyRobot.Logic.Commands
+﻿using ToyRobot.Logic.Interfaces;
+
+namespace ToyRobot.Logic.Commands
 {
     public abstract class RobotCommand
     {
-        protected Robot _robot;
+        protected IRobot _robot;
 
-        protected RobotCommand(Robot robot)
+        protected RobotCommand(IRobot robot)
         {
             _robot = robot;
            

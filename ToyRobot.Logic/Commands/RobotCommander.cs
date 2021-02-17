@@ -2,9 +2,9 @@
 
 namespace ToyRobot.Logic.Commands
 {
-    public class RobotCommander
+    public class RobotCommander : IRobotCommander
     {
-        public Queue<RobotCommand> Commands;
+        public Queue<RobotCommand> Commands { get; set; }
         private Stack<RobotCommand> _undoStack;
 
         public RobotCommander()
@@ -35,5 +35,12 @@ namespace ToyRobot.Logic.Commands
                 numberToUndo--;
             }
         }
+    }
+
+    public interface IRobotCommander
+    {
+        Queue<RobotCommand> Commands { get; set; }
+        void ExecuteCommands();
+        void UndoCommands(int numberToUndo);
     }
 }

@@ -1,14 +1,16 @@
 ﻿using System.Drawing;
+using System.Security.Cryptography;
 using ToyRobot.Logic.Enums;
+using ToyRobot.Logic.Interfaces;
 
 namespace ToyRobot.Logic.Commands
 {
-    public class MoveCommand : RobotCommand
+    public class MoveCommand : RobotCommand, IMoveCommand
     {
-        private readonly Tabletop _tabletop;
+        private readonly ITabletop _tabletop;
 
 
-        public MoveCommand(Robot robot, Tabletop tabletop) : base(robot)
+        public MoveCommand(IRobot robot, ITabletop tabletop) : base(robot)
         {
             _tabletop = tabletop;
         }
@@ -65,5 +67,9 @@ namespace ToyRobot.Logic.Commands
             _robot.Move(Direction.Backward);
 
         }
+    }
+
+    public interface IMoveCommand
+    {
     }
 }

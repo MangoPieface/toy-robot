@@ -2,7 +2,7 @@
 
 namespace ToyRobot.Logic
 {
-    public class Tabletop
+    public class Tabletop : ITabletop
     {
         public Point TableDimention { get; set; }
 
@@ -11,5 +11,10 @@ namespace ToyRobot.Logic
             TableDimention = new Point(tableWidth, tableHeight);
         }
 
+    }
+
+    public interface ITabletop
+    {
+        Point TableDimention { get; set; }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Globalization;
 using ToyRobot.Logic.Enums;
+using ToyRobot.Logic.Interfaces;
 
 namespace ToyRobot.Logic.Commands
 {
-    public class PlaceCommand : RobotCommand
+    public class PlaceCommand : RobotCommand, IPlaceCommand
     {
-        private readonly Tabletop _tabletop;
+        private readonly ITabletop _tabletop;
         public int X { get; set; }
         public int Y { get; set; }
 
         public string Direction { get; set; }
 
-        public PlaceCommand(Robot robot, Tabletop tabletop) : base(robot)
+        public PlaceCommand(IRobot robot, ITabletop tabletop) : base(robot)
         {
             _tabletop = tabletop;
         }
@@ -35,5 +36,12 @@ namespace ToyRobot.Logic.Commands
         {
             _robot.UnPlace();
         }
+    }
+
+    public interface IPlaceCommand
+    {
+        int X { get; set; }
+        int Y { get; set; }
+        string Direction { get; set; }
     }
 }

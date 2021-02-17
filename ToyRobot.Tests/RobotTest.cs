@@ -76,7 +76,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);
@@ -104,7 +105,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);
@@ -135,7 +137,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);
@@ -165,7 +168,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);
@@ -190,7 +194,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);
@@ -219,7 +224,8 @@ namespace ToyRobot.Tests
             Tabletop table = new Tabletop(5, 5);
             RobotCommander commander = new RobotCommander();
 
-            PlaceCommand place = new PlaceCommand(robot);
+            PlaceCommand place = new PlaceCommand(robot, table);
+            place.Direction = "North";
             MoveCommand move = new MoveCommand(robot, table);
             RightCommand right = new RightCommand(robot);
             LeftCommand left = new LeftCommand(robot);

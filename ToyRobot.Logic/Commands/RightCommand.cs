@@ -1,9 +1,11 @@
-﻿namespace ToyRobot.Logic.Commands
+﻿using ToyRobot.Logic.Interfaces;
+
+namespace ToyRobot.Logic.Commands
 {
-    public class RightCommand : RobotCommand
+    public class RightCommand : RobotCommand, IRightCommand
     {
 
-        public RightCommand(Robot robot) : base(robot)
+        public RightCommand(IRobot robot) : base(robot)
         {
         }
 
@@ -25,5 +27,9 @@
 
             _robot.Turn(Robot.Left);
         }
+    }
+
+    public interface IRightCommand
+    {
     }
 }

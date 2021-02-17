@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.DependencyInjection;
 using ToyRobot.Logic;
 using ToyRobot.Logic.Commands;
 using ToyRobot.Logic.Enums;
+using ToyRobot.Logic.Interfaces;
 
 namespace ToyRobot.ConsoleUI
 {
@@ -12,10 +13,25 @@ namespace ToyRobot.ConsoleUI
     {
         static void Main(string[] args)
         {
-            Robot robot = new Robot();
-            Tabletop table = new Tabletop(4, 4);
 
-            RobotCommander commander = new RobotCommander();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton<IRobot, Robot>();
+            serviceCollection.AddSingleton<ITabletop, Tabletop>(s => new Tabletop(4,4));
+            serviceCollection.AddSingleton<IMoveCommand, MoveCommand>();
+            serviceCollection.AddSingleton<IPlaceCommand, PlaceCommand>();
+            serviceCollection.AddSingleton<IRightCommand, RightCommand>();
+            serviceCollection.AddSingleton<ILeftCommand, LeftCommand>();
+            serviceCollection.AddSingleton<IRobotCommander, RobotCommander>();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var robot = serviceProvider.GetService<IRobot>();
+            var moveCommand = serviceProvider.GetService<IMoveCommand>();
+            var rightCommand = serviceProvider.GetService<IRightCommand>();
+            var leftCommand = serviceProvider.GetService<ILeftCommand>();
+            var placeCommand = serviceProvider.GetService<IPlaceCommand>();
+            var commander = serviceProvider.GetService<IRobotCommander>();
+            
 
             while (true)
             {
@@ -23,9 +39,7 @@ namespace ToyRobot.ConsoleUI
                 {
                     Console.WriteLine("Robot is not placed on the table - use PLACE command");
                 }
-
-
-
+                
                 Console.Write("Command: ");
                 var movementCommand = Console.ReadLine()?.ToUpper() ?? "";
 
@@ -35,39 +49,31 @@ namespace ToyRobot.ConsoleUI
                 if (isPlaceCommand)
                 {
                     var position = movementCommand.Split(" ").Skip(1).ToList()[0].Split(",");
+                    placeCommand.X = int.Parse(position[0]);
+                    placeCommand.Y = int.Parse(position[1]);
+                    placeCommand.Direction = position[2];
 
-                    PlaceCommand place = new PlaceCommand(robot, table)
-                    {
-                        X = (int.Parse(position[0])),
-                        Y = (int.Parse(position[1])),
-                        Direction = position[2]
-                    };
-                    commander.Commands.Enqueue(place);
+                    commander.Commands.Enqueue(placeCommand as RobotCommand);
                     commander.ExecuteCommands();
 
                     if (robot.CommandSuccess)
                         Console.WriteLine("PLACED");
                 }
 
-
-
                 switch (movementCommand.ToUpper())
                 {
                     case "MOVE":
-                        MoveCommand move = new MoveCommand(robot, table);
-                        commander.Commands.Enqueue(move);
+                        commander.Commands.Enqueue(moveCommand as RobotCommand);
                         commander.ExecuteCommands();
                         if (robot.CommandSuccess) Console.WriteLine("MOVED");
                         break;
                     case "RIGHT":
-                        RightCommand right = new RightCommand(robot);
-                        commander.Commands.Enqueue(right);
+                        commander.Commands.Enqueue(rightCommand as RobotCommand);
                         commander.ExecuteCommands();
                         if (robot.CommandSuccess) Console.WriteLine("TURNED RIGHT");
                         break;
                     case "LEFT":
-                        LeftCommand left = new LeftCommand(robot);
-                        commander.Commands.Enqueue(left);
+                        commander.Commands.Enqueue(leftCommand as RobotCommand);
                         commander.ExecuteCommands();
                         if (robot.CommandSuccess) Console.WriteLine("TURNED LEFT");
                         break;
@@ -79,11 +85,7 @@ namespace ToyRobot.ConsoleUI
                         if (robot.IsPlaced())
                             Console.WriteLine($"Robot is facing {Enum.GetName(typeof(Facing), robot.Direction)} X position {robot.Position.X} Y position {robot.Position.Y}");
                         break;
-
                 }
-
-                
-
             }
 
         }
