@@ -41,14 +41,14 @@ namespace ToyRobot.ConsoleUI
                 }
                 
                 Console.Write("Command: ");
-                var movementCommand = Console.ReadLine()?.ToUpper() ?? "";
+                var userInput = Console.ReadLine()?.ToUpper() ?? "";
 
 
                 //TODO MOVE THIS SOMEWHERE ELSE WHEN IT'S NOT BEDTIME
-                var isPlaceCommand = Regex.IsMatch(movementCommand, @"^PLACE\b\s\d,{1}\d,{1}(?:NORTH|EAST|SOUTH|WEST)$");
+                var isPlaceCommand = Regex.IsMatch(userInput, @"^PLACE\b\s\d,{1}\d,{1}(?:NORTH|EAST|SOUTH|WEST)$");
                 if (isPlaceCommand)
                 {
-                    var position = movementCommand.Split(" ").Skip(1).ToList()[0].Split(",");
+                    var position = userInput.Split(" ").Skip(1).ToList()[0].Split(",");
                     placeCommand.X = int.Parse(position[0]);
                     placeCommand.Y = int.Parse(position[1]);
                     placeCommand.Direction = position[2];
@@ -60,7 +60,7 @@ namespace ToyRobot.ConsoleUI
                         Console.WriteLine("PLACED");
                 }
 
-                switch (movementCommand.ToUpper())
+                switch (userInput.ToUpper())
                 {
                     case "MOVE":
                         commander.Commands.Enqueue(moveCommand as RobotCommand);
