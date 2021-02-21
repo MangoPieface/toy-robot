@@ -94,8 +94,8 @@ namespace ToyRobot.Tests
             commander.ExecuteCommands();
 
             Assert.Equal(Facing.West,robot.Direction);
-            Assert.Equal(2, robot.Position.Y);
-            Assert.Equal(1, robot.Position.X);
+            Assert.Equal(2, robot.RobotPosition.Y);
+            Assert.Equal(1, robot.RobotPosition.X);
         }
 
         [Fact]
@@ -126,8 +126,8 @@ namespace ToyRobot.Tests
             commander.UndoCommands(8);
 
             Assert.Equal(Facing.North, robot.Direction);
-            Assert.Equal(0, robot.Position.Y);
-            Assert.Equal(0, robot.Position.X);
+            Assert.Equal(0, robot.RobotPosition.Y);
+            Assert.Equal(0, robot.RobotPosition.X);
         }
         
         [Fact]
@@ -157,8 +157,8 @@ namespace ToyRobot.Tests
             commander.UndoCommands(7);
 
             Assert.Equal(Facing.North, robot.Direction);
-            Assert.Equal(0, robot.Position.Y);
-            Assert.Equal(0, robot.Position.X);
+            Assert.Equal(0, robot.RobotPosition.Y);
+            Assert.Equal(0, robot.RobotPosition.X);
         }
 
         [Fact]
@@ -183,8 +183,8 @@ namespace ToyRobot.Tests
             commander.UndoCommands(2);
 
             Assert.Equal(Facing.North, robot.Direction);
-            Assert.Equal(0, robot.Position.Y);
-            Assert.Equal(0, robot.Position.X);
+            Assert.Equal(0, robot.RobotPosition.Y);
+            Assert.Equal(0, robot.RobotPosition.X);
         }
 
         [Fact]
@@ -213,8 +213,8 @@ namespace ToyRobot.Tests
             commander.ExecuteCommands();
             commander.UndoCommands(6);
 
-            Assert.Equal(0, robot.Position.Y);
-            Assert.Equal(0, robot.Position.X);
+            Assert.Equal(0, robot.RobotPosition.Y);
+            Assert.Equal(0, robot.RobotPosition.X);
         }
 
         [Fact]
@@ -239,8 +239,8 @@ namespace ToyRobot.Tests
             commander.ExecuteCommands();
             commander.UndoCommands(1);
 
-            Assert.Equal(0, robot.Position.Y);
-            Assert.Equal(0, robot.Position.X);
+            Assert.Equal(0, robot.RobotPosition.Y);
+            Assert.Equal(0, robot.RobotPosition.X);
         }
     }
 }

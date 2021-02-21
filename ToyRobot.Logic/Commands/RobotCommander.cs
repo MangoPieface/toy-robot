@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ToyRobot.Logic.Interfaces;
 
 namespace ToyRobot.Logic.Commands
 {
@@ -35,12 +36,5 @@ namespace ToyRobot.Logic.Commands
                 numberToUndo--;
             }
         }
-    }
-
-    public interface IRobotCommander
-    {
-        Queue<RobotCommand> Commands { get; set; }
-        void ExecuteCommands();
-        void UndoCommands(int numberToUndo);
     }
 }

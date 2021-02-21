@@ -28,8 +28,4 @@ namespace ToyRobot.Logic.Commands
             _robot.Turn(Robot.Right);
         }
     }
-
-    public interface ILeftCommand
-    {
-    }
 }

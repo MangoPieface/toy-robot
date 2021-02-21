@@ -23,21 +23,21 @@ namespace ToyRobot.Logic.Commands
                 return;
             }
 
-            if (_robot.Position.Y < _tabletop.TableDimention.Y && _robot.Direction == Facing.North)
+            if (_robot.RobotPosition.Coordinates.Y < _tabletop.TableDimention.Y && _robot.RobotPosition.Direction == Facing.North)
             {
                 _robot.Move(Direction.Forward);
                 _robot.CommandSuccess = true;
                 return;
             }
 
-            if (_robot.Position.X < _tabletop.TableDimention.X && _robot.Direction == Facing.East)
+            if (_robot.RobotPosition.Coordinates.X < _tabletop.TableDimention.X && _robot.RobotPosition.Direction == Facing.East)
             {
                 _robot.Move(Direction.Forward);
                 _robot.CommandSuccess = true;
                 return;
             }
 
-            if (_robot.Position.Y > 0 && _robot.Direction == Facing.South)
+            if (_robot.RobotPosition.Coordinates.Y > 0 && _robot.RobotPosition.Direction == Facing.South)
             {
                 _robot.Move(Direction.Forward);
                 _robot.CommandSuccess = true;
@@ -45,7 +45,7 @@ namespace ToyRobot.Logic.Commands
             }
 
 
-            if (_robot.Position.X > 0 && _robot.Direction == Facing.West)
+            if (_robot.RobotPosition.Coordinates.X > 0 && _robot.RobotPosition.Direction == Facing.West)
             {
                 _robot.Move(Direction.Forward);
                 _robot.CommandSuccess = true;
@@ -67,9 +67,11 @@ namespace ToyRobot.Logic.Commands
             _robot.Move(Direction.Backward);
 
         }
-    }
 
-    public interface IMoveCommand
-    {
+
+        public virtual void SetRobot(IRobot robot)
+        {
+            _robot = robot;
+        }
     }
 }

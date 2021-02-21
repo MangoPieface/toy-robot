@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using Newtonsoft.Json;
+using ToyRobot.Logic.Commands;
 using ToyRobot.Logic.Enums;
 using ToyRobot.Logic.Exceptions;
 using ToyRobot.Logic.Interfaces;
@@ -11,34 +13,41 @@ namespace ToyRobot.Logic
         public const string Right = "right";
         public const string Left = "left";
 
-        public Point Position { get; set; }
+        public Position RobotPosition { get; set; }
         public Facing Direction { get; set; }
-        private bool RobotPlaced { get; set; }
+
+        //[JsonProperty]
+        public  bool RobotPlaced { get; set; }
 
         public bool CommandSuccess { get; set; }
 
         public Robot()
         {
-            RobotPlaced = false;
+          
+        }
+
+        public Robot(bool robotPlaced)
+        {
+            RobotPlaced = robotPlaced;
         }
         public void Move(Direction direction) {
-            if (Position == null) throw new ArgumentNullException(nameof(Position));
+            if (RobotPosition == null) throw new ArgumentNullException(nameof(RobotPosition));
 
             var movement = GetMovementDirection(direction);
 
             switch (Direction)
             {
                 case Facing.North:
-                    Position = new Point(Position.X, Position.Y + movement);
+                    RobotPosition.Coordinates = new Point(RobotPosition.Coordinates.X, RobotPosition.Coordinates.Y + movement);
                     return;
                 case Facing.East:
-                    Position = new Point(Position.X + movement, Position.Y);
+                    RobotPosition.Coordinates = new Point(RobotPosition.Coordinates.X + movement, RobotPosition.Coordinates.Y);
                     return;
                 case Facing.South:
-                    Position = new Point(Position.X, Position.Y - movement);
+                    RobotPosition.Coordinates = new Point(RobotPosition.Coordinates.X, RobotPosition.Coordinates.Y - movement);
                     return;
                 case Facing.West:
-                    Position = new Point(Position.X - movement, Position.Y);
+                    RobotPosition.Coordinates = new Point(RobotPosition.Coordinates.X - movement, RobotPosition.Coordinates.Y);
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -83,17 +92,17 @@ namespace ToyRobot.Logic
             }
         }
 
-        public void Place(int x, int y, Facing direction)
+        public void Place(Position robotPosition)
         {
-            Position = new Point(x, y);
-            Direction = direction;
+            RobotPosition = robotPosition;
             RobotPlaced = true;
         }
+
 
         public void UnPlace()
         {
             RobotPlaced = false;
-            Position = Point.Empty;
+            RobotPosition = null;
 
         }
 

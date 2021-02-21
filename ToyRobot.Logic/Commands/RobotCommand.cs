@@ -19,5 +19,6 @@ namespace ToyRobot.Logic.Commands
         {
             return _robot.CommandSuccess;
         }
+
     }
 }
