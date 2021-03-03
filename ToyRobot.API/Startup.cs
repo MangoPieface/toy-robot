@@ -34,6 +34,8 @@ namespace ToyRobot.API
             services.AddScoped<IPlaceCommand, PlaceCommand>();
             services.AddScoped<IRobotCommander, RobotCommander>();
             services.AddScoped<IMoveCommand, MoveCommand>();
+            services.AddScoped<ILeftCommand, LeftCommand>();
+            services.AddScoped<IRightCommand, RightCommand>();
 
         }
 

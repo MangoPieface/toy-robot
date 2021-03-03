@@ -27,5 +27,6 @@ namespace ToyRobot.Logic.Commands
 
             _robot.Turn(Robot.Right);
         }
+
     }
 }

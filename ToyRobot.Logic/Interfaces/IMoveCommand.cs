@@ -2,6 +2,7 @@
 {
     public interface IMoveCommand
     {
-        void SetRobot(IRobot robot);
+
     }
+
 }

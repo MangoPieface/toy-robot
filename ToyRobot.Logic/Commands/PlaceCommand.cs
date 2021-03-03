@@ -15,7 +15,6 @@ namespace ToyRobot.Logic.Commands
             _tabletop = tabletop;
         }
 
-
         public override void Execute()
         {
 

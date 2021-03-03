@@ -15,6 +15,16 @@ namespace ToyRobot.Logic.Commands
         public abstract void Execute();
         public abstract void Undo();
 
+        public virtual void SetRobot(IRobot robot)
+        {
+            _robot = robot;
+        }
+
+        public virtual IRobot GetRobot()
+        {
+            return _robot;
+        }
+
         public virtual bool HasExcecutedSuccesfully()
         {
             return _robot.CommandSuccess;

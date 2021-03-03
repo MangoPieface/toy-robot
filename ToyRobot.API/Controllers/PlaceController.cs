@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ToyRobot.Logic;
 using ToyRobot.Logic.Commands;
+using ToyRobot.Logic.Enums;
 using ToyRobot.Logic.Interfaces;
 
 namespace ToyRobot.API.Controllers
@@ -39,15 +42,19 @@ namespace ToyRobot.API.Controllers
 
 
         [HttpPost]
-        public Robot Post(Position position)
+        public IRobot Post(Position position)
         {
-            _placeCommand.PlacePosition = position;
-            _commander.Commands.Enqueue(_placeCommand as RobotCommand);
-            _commander.ExecuteCommands();
-            
+            var command = (RobotCommand) _placeCommand;
+            if (command == null) throw new ArgumentNullException(nameof(command));
 
-            return _robot as Robot;
+            _placeCommand.PlacePosition = position; 
+            _commander.Commands.Enqueue(command);
+            _commander.ExecuteCommands();
+
+            return command.GetRobot();
         }
+
+
 
     }
 }

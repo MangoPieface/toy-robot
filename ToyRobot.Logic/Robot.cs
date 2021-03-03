@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using Newtonsoft.Json;
 using ToyRobot.Logic.Commands;
 using ToyRobot.Logic.Enums;
 using ToyRobot.Logic.Exceptions;
@@ -14,9 +12,7 @@ namespace ToyRobot.Logic
         public const string Left = "left";
 
         public Position RobotPosition { get; set; }
-        public Facing Direction { get; set; }
 
-        //[JsonProperty]
         public  bool RobotPlaced { get; set; }
 
         public bool CommandSuccess { get; set; }
@@ -35,7 +31,7 @@ namespace ToyRobot.Logic
 
             var movement = GetMovementDirection(direction);
 
-            switch (Direction)
+            switch (RobotPosition.Direction)
             {
                 case Facing.North:
                     RobotPosition.Coordinates = new Point(RobotPosition.Coordinates.X, RobotPosition.Coordinates.Y + movement);
@@ -73,19 +69,19 @@ namespace ToyRobot.Logic
 
             turnDirection = turnDirection.ToLower();
 
-            switch (Direction)
+            switch (RobotPosition.Direction)
             {
                 case Facing.North:
-                    Direction = turnDirection == Right ? Facing.East : Facing.West;
+                    RobotPosition.Direction = turnDirection == Right ? Facing.East : Facing.West;
                     return;
                 case Facing.East:
-                    Direction = turnDirection == Right ? Facing.South : Facing.North;
+                    RobotPosition.Direction = turnDirection == Right ? Facing.South : Facing.North;
                     return;
                 case Facing.South:
-                    Direction = turnDirection == Right ? Facing.West : Facing.East;
+                    RobotPosition.Direction = turnDirection == Right ? Facing.West : Facing.East;
                     return;
                 case Facing.West:
-                    Direction = turnDirection == Right ? Facing.North : Facing.South;
+                    RobotPosition.Direction = turnDirection == Right ? Facing.North : Facing.South;
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -113,4 +109,5 @@ namespace ToyRobot.Logic
 
        
     }
+
 }

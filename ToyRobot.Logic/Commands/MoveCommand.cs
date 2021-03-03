@@ -68,8 +68,12 @@ namespace ToyRobot.Logic.Commands
 
         }
 
+        public override IRobot GetRobot()
+        {
+            return _robot;
+        }
 
-        public virtual void SetRobot(IRobot robot)
+        public override void SetRobot(IRobot robot)
         {
             _robot = robot;
         }
