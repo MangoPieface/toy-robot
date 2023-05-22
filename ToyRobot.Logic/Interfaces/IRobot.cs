@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using ToyRobot.Logic.Enums;
-
-namespace ToyRobot.Logic.Interfaces;
+﻿namespace ToyRobot.Logic.Interfaces;
 public interface IRobot
 {
     Point Position { get; set; }

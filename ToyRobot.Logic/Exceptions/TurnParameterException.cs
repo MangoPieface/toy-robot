@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ToyRobot.Logic.Exceptions;
+﻿namespace ToyRobot.Logic.Exceptions;
 public class TurnParameterException : ArgumentException
 {
     public TurnParameterException(string message)

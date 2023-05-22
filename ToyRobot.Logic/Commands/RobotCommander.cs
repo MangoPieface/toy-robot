@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ToyRobot.Logic.Commands;
+﻿namespace ToyRobot.Logic.Commands;
 
     public class RobotCommander : IRobotCommander
     {

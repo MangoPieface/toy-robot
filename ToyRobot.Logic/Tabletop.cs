@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace ToyRobot.Logic;
+﻿namespace ToyRobot.Logic;
 public class Tabletop : ITabletop
 {
     public Point TableDimention { get; set; }

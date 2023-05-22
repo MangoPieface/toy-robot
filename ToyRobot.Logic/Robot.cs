@@ -1,10 +1,4 @@
-﻿using System;
-using System.Drawing;
-using ToyRobot.Logic.Enums;
-using ToyRobot.Logic.Exceptions;
-using ToyRobot.Logic.Interfaces;
-
-namespace ToyRobot.Logic;
+﻿namespace ToyRobot.Logic;
 
 public class Robot : IRobot
 {

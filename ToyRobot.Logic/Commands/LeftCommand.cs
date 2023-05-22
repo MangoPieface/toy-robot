@@ -1,6 +1,4 @@
-﻿using ToyRobot.Logic.Interfaces;
-
-namespace ToyRobot.Logic.Commands;
+﻿namespace ToyRobot.Logic.Commands;
 public class LeftCommand : RobotCommand, ILeftCommand
 {
 
