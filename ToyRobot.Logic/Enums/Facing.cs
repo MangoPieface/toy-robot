@@ -1,10 +1,8 @@
-﻿namespace ToyRobot.Logic.Enums
+﻿namespace ToyRobot.Logic.Enums;
+public enum Facing
 {
-    public enum Facing
-    {
-        North,
-        East,
-        South,
-        West
-    }
+    North,
+    East,
+    South,
+    West
 }

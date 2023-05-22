@@ -1,25 +1,23 @@
 ﻿using System.Drawing;
 using ToyRobot.Logic.Enums;
 
-namespace ToyRobot.Logic.Interfaces
+namespace ToyRobot.Logic.Interfaces;
+public interface IRobot
 {
-    public interface IRobot
-    {
-        Point Position { get; set; }
-        Facing Direction { get; set; }
+    Point Position { get; set; }
+    Facing Direction { get; set; }
 
-        void Move(Direction direction);
+    void Move(Direction direction);
 
-        void Turn(string direction);
+    void Turn(string direction);
 
-        void Place(int x, int y, Facing facing);
+    void Place(int x, int y, Facing facing);
 
-        bool IsPlaced();
+    bool IsPlaced();
 
-        bool CommandSuccess { get; set; }
+    bool CommandSuccess { get; set; }
 
-        void UnPlace();
+    void UnPlace();
 
 
-    }
 }
