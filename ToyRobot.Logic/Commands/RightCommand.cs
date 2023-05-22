@@ -1,7 +1,6 @@
 ﻿using ToyRobot.Logic.Interfaces;
 
-namespace ToyRobot.Logic.Commands
-{
+namespace ToyRobot.Logic.Commands;
     public class RightCommand : RobotCommand, IRightCommand
     {
 
@@ -32,4 +31,3 @@ namespace ToyRobot.Logic.Commands
     public interface IRightCommand
     {
     }
-}
