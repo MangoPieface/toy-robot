@@ -1,10 +1,4 @@
-﻿using System.Drawing;
-using System.Security.Cryptography;
-using ToyRobot.Logic.Enums;
-using ToyRobot.Logic.Interfaces;
-
-namespace ToyRobot.Logic.Commands
-{
+﻿namespace ToyRobot.Logic.Commands;
     public class MoveCommand : RobotCommand, IMoveCommand
     {
         private readonly ITabletop _tabletop;
@@ -72,4 +66,3 @@ namespace ToyRobot.Logic.Commands
     public interface IMoveCommand
     {
     }
-}

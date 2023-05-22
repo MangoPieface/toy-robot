@@ -1,23 +1,21 @@
-﻿using ToyRobot.Logic.Interfaces;
+﻿namespace ToyRobot.Logic.Commands;
 
-namespace ToyRobot.Logic.Commands
+public abstract class RobotCommand
 {
-    public abstract class RobotCommand
+    protected IRobot _robot;
+
+    protected RobotCommand(IRobot robot)
     {
-        protected IRobot _robot;
-
-        protected RobotCommand(IRobot robot)
-        {
-            _robot = robot;
+        _robot = robot;
            
-        }
+    }
 
-        public abstract void Execute();
-        public abstract void Undo();
+    public abstract void Execute();
+    public abstract void Undo();
 
-        public virtual bool HasExcecutedSuccesfully()
-        {
-            return _robot.CommandSuccess;
-        }
+    public virtual bool HasExcecutedSuccesfully()
+    {
+        return _robot.CommandSuccess;
     }
 }
+

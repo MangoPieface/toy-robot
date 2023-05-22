@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
+﻿namespace ToyRobot.Logic.Commands;
 
-namespace ToyRobot.Logic.Commands
-{
     public class RobotCommander : IRobotCommander
     {
         public Queue<RobotCommand> Commands { get; set; }
@@ -43,4 +41,3 @@ namespace ToyRobot.Logic.Commands
         void ExecuteCommands();
         void UndoCommands(int numberToUndo);
     }
-}
