@@ -1,6 +1,4 @@
-﻿
-
-namespace ToyRobot.Logic.Commands;
+﻿namespace ToyRobot.Logic.Commands;
 public class PlaceCommand : RobotCommand, IPlaceCommand
 {
     private readonly ITabletop _tabletop;

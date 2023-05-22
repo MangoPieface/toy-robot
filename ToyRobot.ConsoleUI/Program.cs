@@ -1,13 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.DependencyInjection;
-using ToyRobot.Logic;
-using ToyRobot.Logic.Commands;
-using ToyRobot.Logic.Enums;
-using ToyRobot.Logic.Interfaces;
-
-namespace ToyRobot.ConsoleUI
+﻿namespace ToyRobot.ConsoleUI
 {
     class Program
     {
