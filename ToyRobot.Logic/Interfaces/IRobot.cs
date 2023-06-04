@@ -6,7 +6,7 @@ public interface IRobot
 
     void Move(Direction direction);
 
-    void Turn(string direction);
+    void Turn(Turning direction);
 
     void Place(int x, int y, Facing facing);
 

@@ -17,7 +17,7 @@
             {
                 RobotCommand command = Commands.Dequeue();
                 command.Execute();
-                if (command.HasExcecutedSuccesfully())
+                if (command.HasExecutedSuccessfully())
                 {
                     _undoStack.Push(command);
                 }

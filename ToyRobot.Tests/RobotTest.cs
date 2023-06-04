@@ -17,7 +17,7 @@ public class RobotTest
             Direction = Facing.North
         };
 
-        robot.Turn("right");
+        robot.Turn(Turning.Right);
         Assert.Equal(Facing.East, robot.Direction);
     }
 
@@ -28,8 +28,8 @@ public class RobotTest
         {
             Direction = Facing.North
         };
-        robot.Turn("right");
-        robot.Turn("right");
+        robot.Turn(Turning.Right);
+        robot.Turn(Turning.Right);
 
         Assert.Equal(Facing.South, robot.Direction);
     }
@@ -41,32 +41,32 @@ public class RobotTest
         {
             Direction = Facing.North
         };
-        robot.Turn("left");
+        robot.Turn(Turning.Left);
 
         Assert.Equal(Facing.West, robot.Direction);
     }
 
-    [Fact]
-    public void Robot_RobotFacesNorthAndPassesNull_RobotReportsException()
-    {
-        IRobot robot = new Robot
-        {
-            Direction = Facing.North
-        };
+    //[Fact]
+    // public void Robot_RobotFacesNorthAndPassesNull_RobotReportsException()
+    // {
+    //     IRobot robot = new Robot
+    //     {
+    //         Direction = Facing.North
+    //     };
+    //
+    //     Assert.Throws<ArgumentNullException>(() => robot.Turn(null));
+    // }
 
-        Assert.Throws<ArgumentNullException>(() => robot.Turn(null));
-    }
-
-    [Fact]
-    public void Robot_RobotFacesNorthAndPassesInvalidInput_RobotReportsException()
-    {
-        IRobot robot = new Robot
-        {
-            Direction = Facing.North
-        };
-
-        Assert.Throws<TurnParameterException>(() => robot.Turn("abc"));
-    }
+    // [Fact]
+    // public void Robot_RobotFacesNorthAndPassesInvalidInput_RobotReportsException()
+    // {
+    //     IRobot robot = new Robot
+    //     {
+    //         Direction = Facing.North
+    //     };
+    //
+    //     Assert.Throws<TurnParameterException>(() => robot.Turn("abc"));
+    // }
 
     [Fact]
     public void Robot_TestMultipleMovement_RobotReportsCorrectLocation()
@@ -75,8 +75,10 @@ public class RobotTest
         Tabletop table = new Tabletop(5, 5);
         RobotCommander commander = new RobotCommander();
 
-        PlaceCommand place = new PlaceCommand(robot, table);
-        place.Direction = "North";
+        PlaceCommand place = new PlaceCommand(robot, table)
+        {
+            Direction = "North"
+        };
         MoveCommand move = new MoveCommand(robot, table);
         RightCommand right = new RightCommand(robot);
         LeftCommand left = new LeftCommand(robot);

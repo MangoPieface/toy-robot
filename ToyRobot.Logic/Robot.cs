@@ -2,9 +2,8 @@
 
 public class Robot : IRobot
 {
-    public const string Right = "right";
-    public const string Left = "left";
-
+    // public const string Right = "right";
+    // public const string Left = "left";
     public Point Position { get; set; }
     public Facing Direction { get; set; }
     private bool RobotPlaced { get; set; }
@@ -49,27 +48,21 @@ public class Robot : IRobot
         return movement;
     }
 
-    public void Turn(string turnDirection)
+    public void Turn(Turning turningDirection)
     {
-        if (turnDirection == null) throw new ArgumentNullException(nameof(turnDirection));
-        if (turnDirection.ToLower() != Right && Left != turnDirection.ToLower())
-            throw new TurnParameterException("Turn direction can only be 'left' or 'right");
-
-        turnDirection = turnDirection.ToLower();
-
         switch (Direction)
         {
             case Facing.North:
-                Direction = turnDirection == Right ? Facing.East : Facing.West;
+                Direction = turningDirection == Turning.Right ? Facing.East : Facing.West;
                 return;
             case Facing.East:
-                Direction = turnDirection == Right ? Facing.South : Facing.North;
+                Direction = turningDirection == Turning.Right ? Facing.South : Facing.North;
                 return;
             case Facing.South:
-                Direction = turnDirection == Right ? Facing.West : Facing.East;
+                Direction = turningDirection == Turning.Right ? Facing.West : Facing.East;
                 return;
             case Facing.West:
-                Direction = turnDirection == Right ? Facing.North : Facing.South;
+                Direction = turningDirection == Turning.Right ? Facing.North : Facing.South;
                 return;
             default:
                 throw new ArgumentOutOfRangeException();

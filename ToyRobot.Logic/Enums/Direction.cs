@@ -1,6 +1,14 @@
-﻿namespace ToyRobot.Logic.Enums;
+﻿using ToyRobot.Logic.Commands;
+
+namespace ToyRobot.Logic.Enums;
 public enum Direction
 {
     Forward,
-    Backward
+    Backward,
+}
+
+public enum Turning
+{
+    Right,
+    Left,
 }
