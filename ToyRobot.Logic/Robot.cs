@@ -16,7 +16,6 @@ public class Robot : IRobot
         RobotPlaced = false;
     }
     public void Move(Direction direction) {
-        if (Position == null) throw new ArgumentNullException(nameof(Position));
 
         var movement = GetMovementDirection(direction);
 
