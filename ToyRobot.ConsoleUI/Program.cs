@@ -1,4 +1,11 @@
-﻿var serviceCollection = new ServiceCollection();
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using ToyRobot.Logic.Helpers;
+
+
+var serviceCollection = new ServiceCollection();
 serviceCollection.AddSingleton<IRobot, Robot>();
 serviceCollection.AddSingleton<ITabletop, Tabletop>(s => new Tabletop(4,4));
 serviceCollection.AddSingleton<IMoveCommand, MoveCommand>();
@@ -6,6 +13,7 @@ serviceCollection.AddSingleton<IPlaceCommand, PlaceCommand>();
 serviceCollection.AddSingleton<IRightCommand, RightCommand>();
 serviceCollection.AddSingleton<ILeftCommand, LeftCommand>();
 serviceCollection.AddSingleton<IRobotCommander, RobotCommander>();
+serviceCollection.AddSingleton<IKafkaConsumer, KafkaConsumer>();
 
 var serviceProvider = serviceCollection.BuildServiceProvider();
 
@@ -15,7 +23,25 @@ var rightCommand = serviceProvider.GetService<IRightCommand>();
 var leftCommand = serviceProvider.GetService<ILeftCommand>();
 var placeCommand = serviceProvider.GetService<IPlaceCommand>();
 var commander = serviceProvider.GetService<IRobotCommander>();
-            
+var kafkaConsumer = serviceProvider.GetService<IKafkaConsumer>();
+
+var builder = new ConfigurationBuilder()
+    .AddJsonFile($"appsettings.json", true, true);
+
+var configFile = builder.Build();
+
+var kafkaServer = configFile["Kafka:Server"];
+var username  = configFile["Kafka:SaslUsername"];
+var password  = configFile["Kafka:SaslPassword"];
+
+var config = new ProducerConfig { 
+    BootstrapServers = kafkaServer, 
+    SaslUsername = username, 
+    SaslPassword  = password,
+    SecurityProtocol = SecurityProtocol.SaslSsl,
+    SaslMechanism = SaslMechanism.Plain,
+    RequestTimeoutMs = 4500
+};
 
 while (true)
 {
@@ -29,37 +55,30 @@ while (true)
 
 
     //TODO MOVE THIS SOMEWHERE ELSE WHEN IT'S NOT BEDTIME
-    var isPlaceCommand = Regex.IsMatch(userInput, @"^PLACE\b\s\d,{1}\d,{1}(?:NORTH|EAST|SOUTH|WEST)$");
+    var isPlaceCommand = PlaceHelper.IsPlaceCommand(userInput);
     if (isPlaceCommand)
     {
-        var position = userInput.Split(" ").Skip(1).ToList()[0].Split(",");
-        placeCommand.X = int.Parse(position[0]);
-        placeCommand.Y = int.Parse(position[1]);
-        placeCommand.Direction = position[2];
 
-        commander.Commands.Enqueue(placeCommand as RobotCommand);
+        
+        //commander.Commands.Enqueue(placeCommand as RobotCommand);
+        await QueueCommandToKafka(config, userInput.ToUpper());
         commander.ExecuteCommands();
 
         if (robot.CommandSuccess)
             Console.WriteLine("PLACED");
     }
-
+    
     switch (userInput.ToUpper())
     {
         case "MOVE":
-            commander.Commands.Enqueue(moveCommand as RobotCommand);
+            await QueueCommandToKafka(config, "MOVE");
             commander.ExecuteCommands();
-            if (robot.CommandSuccess) Console.WriteLine("MOVED");
             break;
         case "RIGHT":
-            commander.Commands.Enqueue(rightCommand as RobotCommand);
-            commander.ExecuteCommands();
-            if (robot.CommandSuccess) Console.WriteLine("TURNED RIGHT");
+            await QueueCommandToKafka(config, "RIGHT");
             break;
         case "LEFT":
-            commander.Commands.Enqueue(leftCommand as RobotCommand);
-            commander.ExecuteCommands();
-            if (robot.CommandSuccess) Console.WriteLine("TURNED LEFT");
+            await QueueCommandToKafka(config, "LEFT");
             break;
         case "UNDO":
             commander.UndoCommands(1);
@@ -69,5 +88,21 @@ while (true)
             if (robot.IsPlaced())
                 Console.WriteLine($"Robot is facing {Enum.GetName(typeof(Facing), robot.Direction)} X position {robot.Position.X} Y position {robot.Position.Y}");
             break;
+    }
+}
+
+async Task QueueCommandToKafka(ProducerConfig producerConfig, string robotCommand)
+{
+    const string topic = "moves";
+    
+    using var producer = new ProducerBuilder<Null, string>(producerConfig).Build();
+    try
+    {
+        var dr = await producer.ProduceAsync(topic, new Message<Null, string> { Value = robotCommand });
+        Console.WriteLine($"Delivered '{dr.Value}' to '{dr.TopicPartitionOffset}'");
+    }
+    catch (ProduceException<Null, string> e)
+    {
+        Console.WriteLine($"Delivery failed: {e.Error.Reason}");
     }
 }

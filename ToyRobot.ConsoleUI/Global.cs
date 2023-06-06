@@ -6,3 +6,4 @@ global using ToyRobot.Logic;
 global using ToyRobot.Logic.Commands;
 global using ToyRobot.Logic.Enums;
 global using ToyRobot.Logic.Interfaces;
+global using Confluent.Kafka;

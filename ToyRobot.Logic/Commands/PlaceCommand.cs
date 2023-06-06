@@ -16,25 +16,18 @@ public class PlaceCommand : RobotCommand, IPlaceCommand
     {
         if (X > _tabletop.TableDimention.X && Y > _tabletop.TableDimention.Y)
         {
-            TheRobot.CommandSuccess = false;
+            Robot.CommandSuccess = false;
             return;
         }
 
         var direction = (Facing) Enum.Parse(typeof(Facing),
             CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Direction.ToLower()));
-        TheRobot.Place(X, Y, direction);
-        TheRobot.CommandSuccess = true;
+        Robot.Place(X, Y, direction);
+        Robot.CommandSuccess = true;
     }
 
     public override void Undo()
     {
-        TheRobot.UnPlace();
+        Robot.UnPlace();
     }
-}
-
-public interface IPlaceCommand
-{
-    int X { get; set; }
-    int Y { get; set; }
-    string Direction { get; set; }
 }

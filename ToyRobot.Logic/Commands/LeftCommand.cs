@@ -8,24 +8,20 @@ public class LeftCommand : RobotCommand, ILeftCommand
 
     public override void Execute()
     {
-        if (!TheRobot.IsPlaced())
+        if (!Robot.IsPlaced())
         {
-            TheRobot.CommandSuccess = false;
+            Robot.CommandSuccess = false;
             return;
         }
 
-        TheRobot.Turn(Turning.Left);
-        TheRobot.CommandSuccess = true;
+        Robot.Turn(Turning.Left);
+        Robot.CommandSuccess = true;
     }
 
     public override void Undo()
     {
-        if (!TheRobot.IsPlaced()) return;
+        if (!Robot.IsPlaced()) return;
 
-        TheRobot.Turn(Turning.Right);
+        Robot.Turn(Turning.Right);
     }
-}
-
-public interface ILeftCommand
-{
 }

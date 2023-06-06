@@ -3,8 +3,7 @@
 public class MoveCommand : RobotCommand, IMoveCommand
 {
     private readonly ITabletop _tabletop;
-
-
+    
     public MoveCommand(IRobot robot, ITabletop tabletop) : base(robot)
     {
         _tabletop = tabletop;
@@ -12,58 +11,52 @@ public class MoveCommand : RobotCommand, IMoveCommand
 
     public override void Execute()
     {
-        if (!TheRobot.IsPlaced())
+        if (!Robot.IsPlaced())
         {
-            TheRobot.CommandSuccess = false;
+            Robot.CommandSuccess = false;
             return;
         }
 
-        if (TheRobot.Position.Y < _tabletop.TableDimention.Y && TheRobot.Direction == Facing.North)
+        if (Robot.Position.Y < _tabletop.TableDimention.Y && Robot.Direction == Facing.North)
         {
-            TheRobot.Move(Direction.Forward);
-            TheRobot.CommandSuccess = true;
+            Robot.Move(Direction.Forward);
+            Robot.CommandSuccess = true;
             return;
         }
 
-        if (TheRobot.Position.X < _tabletop.TableDimention.X && TheRobot.Direction == Facing.East)
+        if (Robot.Position.X < _tabletop.TableDimention.X && Robot.Direction == Facing.East)
         {
-            TheRobot.Move(Direction.Forward);
-            TheRobot.CommandSuccess = true;
+            Robot.Move(Direction.Forward);
+            Robot.CommandSuccess = true;
             return;
         }
 
-        if (TheRobot.Position.Y > 0 && TheRobot.Direction == Facing.South)
+        if (Robot.Position.Y > 0 && Robot.Direction == Facing.South)
         {
-            TheRobot.Move(Direction.Forward);
-            TheRobot.CommandSuccess = true;
+            Robot.Move(Direction.Forward);
+            Robot.CommandSuccess = true;
             return;
         }
-
-
-        if (TheRobot.Position.X > 0 && TheRobot.Direction == Facing.West)
+        
+        if (Robot.Position.X > 0 && Robot.Direction == Facing.West)
         {
-            TheRobot.Move(Direction.Forward);
-            TheRobot.CommandSuccess = true;
+            Robot.Move(Direction.Forward);
+            Robot.CommandSuccess = true;
             return;
         }
-
-        TheRobot.CommandSuccess = false;
+        
+        Robot.CommandSuccess = false;
     }
 
 
     public override void Undo()
     {
-        if (!TheRobot.IsPlaced())
+        if (!Robot.IsPlaced())
         {
             return;
         }
-
-
-        TheRobot.Move(Direction.Backward);
+        
+        Robot.Move(Direction.Backward);
 
     }
-}
-
-public interface IMoveCommand
-{
 }

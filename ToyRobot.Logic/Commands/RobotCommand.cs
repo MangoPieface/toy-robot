@@ -2,19 +2,18 @@
 
 public abstract class RobotCommand
 {
-    protected readonly IRobot TheRobot;
+    protected readonly IRobot Robot;
 
-    protected RobotCommand(IRobot theRobot)
+    protected RobotCommand(IRobot robot)
     {
-        TheRobot = theRobot;
+        Robot = robot;
     }
-
     public abstract void Execute();
     public abstract void Undo();
 
     public virtual bool HasExecutedSuccessfully()
     {
-        return TheRobot.CommandSuccess;
+        return Robot.CommandSuccess;
     }
 }
 

@@ -2,30 +2,26 @@
     public class RightCommand : RobotCommand, IRightCommand
     {
 
-        public RightCommand(IRobot theRobot) : base(theRobot)
+        public RightCommand(IRobot robot) : base(robot)
         {
         }
 
         public override void Execute()
         {
-            if (!TheRobot.IsPlaced())
+            if (!Robot.IsPlaced())
             {
-                TheRobot.CommandSuccess = false;
+                Robot.CommandSuccess = false;
                 return;
             }
 
-            TheRobot.Turn(Turning.Right);
-            TheRobot.CommandSuccess = true;
+            Robot.Turn(Turning.Right);
+            Robot.CommandSuccess = true;
         }
 
         public override void Undo()
         {
-            if (!TheRobot.IsPlaced()) return;
+            if (!Robot.IsPlaced()) return;
 
-            TheRobot.Turn(Turning.Left);
+            Robot.Turn(Turning.Left);
         }
-    }
-
-    public interface IRightCommand
-    {
     }
