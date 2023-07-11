@@ -243,4 +243,29 @@ public class RobotTest
         Assert.Equal(0, robot.Position.Y);
         Assert.Equal(0, robot.Position.X);
     }
+
+    //[Fact]
+    //public void Robot_TheRobotIsFacingWestAndCanMoveForward_RobotMovesWestSuccesfully()
+    //{
+    //    Robot robot = new Robot();
+    //    Tabletop table = new Tabletop(5, 5);
+    //    RobotCommander commander = new RobotCommander();
+
+    //    PlaceCommand place = new PlaceCommand(robot, table);
+    //    place.Direction = "West";
+    //    place.X = 1;
+    //    MoveCommand move = new MoveCommand(robot, table);
+    //    RightCommand right = new RightCommand(robot);
+    //    LeftCommand left = new LeftCommand(robot);
+
+
+    //    commander.Commands.Enqueue(place);
+    //    commander.Commands.Enqueue(move);
+
+
+    //    commander.ExecuteCommands();
+
+    //    Assert.Equal(0, robot.Position.Y);
+    //    Assert.Equal(0, robot.Position.X);
+    //}
 }
